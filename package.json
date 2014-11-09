@@ -1,0 +1,19 @@
+{
+  "name": "docopt-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run check-style && npm run unit-test",
+    "check-style": "jshint lib test && jscs lib test",
+    "unit-test": "mocha -R spec --recursive lib test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "jscs": "^1.7.3",
+    "jshint": "^2.5.10",
+    "mocha": "^2.0.1"
+  }
+}
