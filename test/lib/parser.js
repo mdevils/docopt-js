@@ -31,9 +31,6 @@ describe('Parser', function () {
             token.value.should.equal('Usage:');
             token = parser.next();
             token.type.should.equal(Token.TEXT);
-            token.value.should.equal('');
-            token = parser.next();
-            token.type.should.equal(Token.TEXT);
             token.value.should.equal('World');
             token = parser.next();
             token.type.should.equal(Token.EOF);
@@ -45,8 +42,44 @@ describe('Parser', function () {
             token.type.should.equal(Token.USAGE);
             token.value.should.equal('usage:');
             token = parser.next();
+            token.type.should.equal(Token.EOF);
+        });
+
+        it('should return OPTIONS when applicable', function () {
+            var parser = new Parser('Options:\nWorld');
+            var token = parser.next();
+            token.type.should.equal(Token.OPTIONS);
+            token.value.should.equal('Options:');
+            token = parser.next();
             token.type.should.equal(Token.TEXT);
-            token.value.should.equal('');
+            token.value.should.equal('World');
+            token = parser.next();
+            token.type.should.equal(Token.EOF);
+        });
+
+        it('should return OPTIONS for lower case', function () {
+            var parser = new Parser('options:');
+            var token = parser.next();
+            token.type.should.equal(Token.OPTIONS);
+            token.value.should.equal('options:');
+            token = parser.next();
+            token.type.should.equal(Token.EOF);
+        });
+
+        it('should return USAGE and OPTIONS when applicable', function () {
+            var parser = new Parser('Usage:\nHello\nOptions:\nWorld');
+            var token = parser.next();
+            token.type.should.equal(Token.USAGE);
+            token.value.should.equal('Usage:');
+            token = parser.next();
+            token.type.should.equal(Token.TEXT);
+            token.value.should.equal('Hello');
+            token = parser.next();
+            token.type.should.equal(Token.OPTIONS);
+            token.value.should.equal('Options:');
+            token = parser.next();
+            token.type.should.equal(Token.TEXT);
+            token.value.should.equal('World');
             token = parser.next();
             token.type.should.equal(Token.EOF);
         });
