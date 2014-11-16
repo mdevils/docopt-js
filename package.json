@@ -3,10 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "unit-coverage": {
+    "common": [
+      "-s",
+      "lib/**",
+      "-t",
+      "test/**",
+      "-a",
+      "lib",
+      "-S",
+      "relative",
+      "-O",
+      "tests=test",
+      "--",
+      "--recursive",
+      "lib",
+      "test"
+    ]
+  },
   "scripts": {
     "test": "npm run check-style && npm run unit-test",
     "check-style": "jshint lib test && jscs lib test",
-    "unit-test": "mocha -R spec --recursive lib test"
+    "unit-test": "mocha -R spec --recursive lib test",
+    "coverage": "unit-coverage run -p common",
+    "coverage-html": "unit-coverage run -p common -r html -o coverage.html"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +34,7 @@
     "chai": "^1.9.2",
     "jscs": "^1.7.3",
     "jshint": "^2.5.10",
-    "mocha": "^2.0.1"
+    "mocha": "^2.0.1",
+    "unit-coverage": "^3.2.0"
   }
 }
