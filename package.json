@@ -1,8 +1,9 @@
 {
   "name": "docopt-js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "author": "Marat Dulin <mdevils@yandex.ru>",
+  "license": "MIT",
+  "description": "Easy CLI toolkit",
   "unit-coverage": {
     "common": [
       "-s",
@@ -26,10 +27,9 @@
     "check-style": "jshint lib test && jscs lib test",
     "unit-test": "mocha -R spec --recursive lib test",
     "coverage": "unit-coverage run -p common",
-    "coverage-html": "unit-coverage run -p common -r html -o coverage.html"
+    "coverage-html": "unit-coverage run -p common -r html -o coverage.html",
+    "travis": "npm run test && unit-coverage run -p common -r lcov -o out.lcov && cat out.lcov | coveralls"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "chai": "^1.9.2",
     "jscs": "^1.7.3",

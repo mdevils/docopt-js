@@ -228,5 +228,33 @@ describe('Parser', function () {
                 token.type.should.equal(Token.EOF);
             });
         });
+
+        describe('Usage', function () {
+            describe('identifiers', function () {
+                it('should return USAGE_IDENTIFIER for identifiers next to Usage', function () {
+                    var parser = new Parser('Usage: tool');
+                    var token = parser.next();
+                    token.type.should.equal(Token.USAGE);
+                    token.value.should.equal('Usage:');
+                    token = parser.next();
+                    token.type.should.equal(Token.USAGE_IDENTIFIER);
+                    token.value.should.equal('tool');
+                    token = parser.next();
+                    token.type.should.equal(Token.EOF);
+                });
+
+                it('should return USAGE_IDENTIFIER for identifiers on the next line to Usage', function () {
+                    var parser = new Parser('Usage:\n tool');
+                    var token = parser.next();
+                    token.type.should.equal(Token.USAGE);
+                    token.value.should.equal('Usage:');
+                    token = parser.next();
+                    token.type.should.equal(Token.USAGE_IDENTIFIER);
+                    token.value.should.equal('tool');
+                    token = parser.next();
+                    token.type.should.equal(Token.EOF);
+                });
+            });
+        });
     });
 });
